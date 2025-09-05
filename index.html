@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Navyashree M S - Portfolio</title>
+  <meta name="color-scheme" content="light dark">
+  <style>
+    /* ===================== CSS VARIABLES + THEMES ===================== */
+    :root{
+      --bg: #0f172a;
+      --surface: rgba(255,255,255,0.10);
+      --text: #e6e6e6;
+      --muted: #cbd5e1;
+      --primary: #60a5fa;
+      --border: rgba(255,255,255,0.25);
+      --shadow: 0 10px 30px rgba(0,0,0,.25);
+      --accent: #34d399;
+      --container: 1200px;
+    }
+    #skills {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  padding: 20px;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.skills-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.skill {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Circular Progress */
+.circle {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: conic-gradient(
+    var(--color) calc(var(--percent) * 1%),
+    #e0e0e0 0
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: var(--color);
+}
+
+.circle span {
+  position: absolute;
+  font-size: 1.1rem;
+  color: #333;
+  font-weight: bold;
+  background: #fff;
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+    [data-theme="light"]{
+      --bg: #ecf3ff;
+      --surface: rgba(255,255,255,0.55);
+      --text: #1f2937;
+      --muted: #475569;
+      --primary: #2563eb;
+      --border: rgba(0,0,0,0.12);
+      --shadow: 0 10px 30px rgba(31,41,55,.15);
+      --accent: #059669;
+    }
+    .about-section {
+      padding: 60px 20px;
+      background: linear-gradient(135deg, #f9fafc, #eef2f3);
+      text-align: center;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .about-container { max-width: 700px; margin: 0 auto; }
+    .about-section h1 { font-size: 2.2rem; margin-bottom: 15px; }
+    .highlight { color: #0077ff; }
+    .about-section p { font-size: 1.1rem; line-height: 1.7; margin-bottom: 15px; color: #444; }
+    .btn {
+      display: inline-block; margin-top: 20px; padding: 12px 25px;
+      background: #0077ff; color: white; font-size: 1rem; border-radius: 8px;
+      text-decoration: none; transition: background 0.3s ease;
+    }
+    .btn:hover { background: #005fcc; }
+
+    /* Global */
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 600px at 10% -10%, #93c5fd55, transparent 60%),
+        radial-gradient(900px 500px at 110% 10%, #a7f3d055, transparent 60%),
+        linear-gradient(135deg, #0ea5e955, #6366f155),
+        var(--bg);
+      min-height:100dvh;
+    }
+    .container{max-width:var(--container); margin:0 auto; padding:20px}
+
+    /* ===================== GLASS UTILS ===================== */
+    .glass{
+      background: var(--surface);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border:1px solid var(--border);
+      border-radius:16px;
+      box-shadow:var(--shadow);
+    }
+
+    /* ===================== HEADER + NAV ===================== */
+    header{
+      position:sticky; top:0; z-index:50;
+      padding:14px 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,.12), transparent);
+    }
+    .nav{ display:flex; align-items:center; justify-content:space-between; padding:12px 18px; }
+    .brand{font-weight:800; letter-spacing:.3px}
+    .nav ul{ list-style:none; display:flex; gap:14px; padding:0; margin:0; }
+    .nav a{
+      text-decoration:none; color:var(--text); font-weight:600;
+      padding:8px 12px; border-radius:10px; transition:.25s;
+    }
+    .nav a:hover{background:var(--surface)}
+    .nav a.active{outline:2px solid var(--primary); color:var(--primary)}
+    .toggle{ border:1px solid var(--border); background:transparent; color:var(--text);
+      padding:8px 12px; border-radius:10px; cursor:pointer; font-weight:700; }
+
+    /* ===================== LAYOUT ===================== */
+    main{ display:flex; gap:20px; flex-wrap:wrap; }
+    section.primary{flex:2 1 640px}
+    aside{flex:1 1 320px; padding:20px}
+    article{padding:22px; margin-bottom:20px}
+    article h2{margin:0 0 12px; color:var(--primary); font-size:1.5rem}
+
+    /* Tables */
+    table{width:100%; border-collapse:collapse; overflow:hidden}
+    th,td{padding:12px; border:1px solid var(--border); text-align:left}
+    th{background:color-mix(in oklab, var(--surface) 60%, white)}
+    tr:hover td{background:color-mix(in oklab, var(--surface) 70%, white)}
+
+    /* Skills bars */
+    .bar{height:10px; border-radius:999px; background:color-mix(in oklab, var(--surface) 60%, #fff); overflow:hidden}
+    .bar > span{display:block; height:100%}
+    .b-html{width:90%; background:#e34c26}
+    .b-css{width:80%; background:#2965f1}
+    .b-py{width:75%; background:#3776ab}
+    .b-ml{width:70%; background:#22c55e}
+
+    /* Figure */
+    figure{margin:0; text-align:center}
+    figure img{max-width:120px; aspect-ratio:1/1; border-radius:50%; border:3px solid var(--border)}
+    figcaption{opacity:.8;color:#040404; margin-top:6px}
+
+    /* Aside lists */
+    aside h3{margin:0 0 10px; color:var(--primary)}
+    aside ul{margin:0 0 16px 18px}
+
+    /* Footer */
+    footer{margin:24px 0; padding:18px; text-align:center}
+
+    /* ===================== INTERACTIONS ===================== */
+    .reveal{opacity:0; transform: translateY(22px); transition: opacity .6s ease, transform .6s ease}
+    .reveal.show{opacity:1; transform:none}
+
+    /* Buttons */
+    .btn{
+      display:inline-block; padding:10px 14px; border-radius:10px;
+      background:var(--primary); color:white; text-decoration:none; font-weight:700;
+      border:none; cursor:pointer;
+      box-shadow:0 6px 20px color-mix(in oklab, var(--primary), black 30%);
+      transition:transform .15s ease;
+    }
+    .btn:active{transform:translateY(1px)}
+    .percent {
+  display: inline-block;
+  margin-left: 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #007bff; /* blue */
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+  line-height: 40px; /* centers text */
+}
+
+
+    /* Dialog details styling */
+    #dialogBody ul {
+      padding-left: 20px;
+      color: var(--text);
+    }
+    #dialogBody li {
+      margin-bottom: 6px;
+      font-size: 0.95rem;
+    }
+   #certifications {
+  background: var(--surface);         /* same as glass cards */
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  padding: 20px;
+  margin-top: 20px;
+}
+
+#certifications h2 {
+  color: var(--primary);
+  margin-bottom: 12px;
+}
+
+#certifications ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#certifications li {
+  margin: 10px 0;
+  padding-left: 28px;
+  position: relative;
+  color: var(--text);
+  font-size: 1rem;
+}
+
+#certifications li::before {
+  content: "✔";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: bold;
+}
+.copy-btn {
+  background-color: #007BFF;   /* Blue color */
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  margin-left: 8px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.copy-btn:hover {
+  background-color: #0056b3;   /* Darker blue on hover */
+}
+
+section {
+  scroll-margin-top: 90px;
+}
+    h3{color: #005fcc;}
+    /* Reduce motion preference */
+    @media (prefers-reduced-motion: reduce){
+      .reveal{transition:none}
+      html{scroll-behavior:auto}
+    }
+    @media (max-width: 720px){ .nav ul{display:none} }
+  </style>
+</head>
+<body>
+  <!-- ===================== HEADER / NAV ===================== -->
+  <header>
+    <div class="container glass nav">
+      <div class="brand">Navyashree M S</div>
+      <ul>
+        <li><a href="#about"   class="navlink">About</a></li>
+        <li><a href="#skills"  class="navlink">Skills</a></li>
+        <li><a href="#projects"class="navlink">Projects</a></li>
+        <li><a href="#xp"      class="navlink">Education</a></li>
+      </ul>
+      <button id="themeBtn" class="toggle" aria-label="Toggle theme">🌙</button>
+    </div>
+  </header>
+
+  <div class="container">
+    <main>
+      <!-- ===================== LEFT / PRIMARY ===================== -->
+      <section class="primary">
+        <!-- About -->
+        <article id="about" class="glass reveal">
+          <h2>About Me</h2>
+          <section class="about-section">
+            <div class="about-container">
+              <h3>Hello! I’m Navya </h3>
+              <p><strong>7th-semester Computer Science student</strong>, enthusiastic and motivated, seeking an entry-level opportunity where I can apply my technical skills, expand my knowledge, and contribute to meaningful projects.</p>
+              <p>My interests include <strong>Artificial Intelligence</strong>, <strong>Machine Learning</strong>, and <strong>Software Development</strong>. I am passionate about creating innovative and impactful solutions that address real-world challenges.</p>
+            </div>
+          </section>
+          <a class="btn" href="#projects">View Projects</a>
+          <a class="btn" href="resnav.pdf" style="margin-left:8px">Download Resume</a>
+        </article>
+
+        <!-- Skills -->
+        <article id="skills" class="glass reveal">
+          <h2>Skills</h2>
+  <div class="skills-container">
+    <div class="skill">
+      <div class="circle" style="--percent: 90; --color: #4caf50;">
+        <span>90%</span>
+      </div>
+      <p>HTML</p>
+    </div>
+
+    <div class="skill">
+      <div class="circle" style="--percent: 70; --color: #2196f3;">
+        <span>70%</span>
+      </div>
+      <p>Python</p>
+    </div>
+
+    <div class="skill">
+      <div class="circle" style="--percent: 60; --color: #ff9800;">
+        <span>60%</span>
+      </div>
+      <p>CSS</p>
+    </div>
+
+    <div class="skill">
+      <div class="circle" style="--percent: 45; --color: #9c27b0;">
+        <span>45%</span>
+      </div>
+      <p>JavaScript</p>
+    </div>
+  </div>
+        </article>
+<article id="certifications" class="glass reveal">
+  <h2>Certifications</h2>
+  <ul>
+    <li>Introduction to Artificial Intelligence - Infosys Springboard. </li>
+    <li>Introduction to Cyber Security – Simpli Learn. </li>
+    <li>Software Engineering and Agile software development- Infosys Springboard. </li>
+  </ul>
+</article>
+
+        <!-- Projects -->
+        <article id="projects" class="glass reveal">
+          <h2>Projects</h2>
+          <ul>
+            <li>
+              <b>Voice Cloning with AI</b> — generative models for custom voice synthesis.
+              <button class="btn" onclick="openProject('Voice Cloning with AI', `
+                <ul>
+                  <li>Developed a system that clones voices using generative AI models.</li>
+                  <li>Implemented deep learning frameworks like TensorFlow & PyTorch.</li>
+                  <li>Focused on accuracy and naturalness of synthesized voice.</li>
+                </ul>`)">Details</button>
+            </li>
+            <li style="margin-top:10px">
+              <b>Leave Management System</b> — approval workflow for students/faculty.
+              <button class="btn" onclick="openProject('Leave Management System', `
+                <ul>
+                  <li>Designed a role-based access system for students and faculty.</li>
+                  <li>Added notifications for real-time approval updates.</li>
+                  <li>Built simple analytics dashboard for leave tracking.</li>
+                </ul>`)">Details</button>
+            </li>
+          </ul>
+        </article>
+
+        <!-- Experience & Education -->
+        <article id="xp" class="glass reveal">
+          <h2>Education</h2>
+          <table>
+            <tr><th>Year</th><th>Education</th><th>University/Board</th><th>CGPA/Percentage</th></tr>
+            <tr><td>2022–2026</td><td>B.E. in CSE</td><td>Visvesvaraya Technological University</td><td>8.74 CGPA</td></tr>
+            <tr><td>2020-2022</td><td>PUC</td><td>Karnataka PUE Board</td><td>80%</td></tr>
+            <tr><td>2019-2020</td><td>10th</td><td>CBSE Board</td><td>84%</td></tr>
+         </table>
+        </article>
+      </section>
+
+      <!-- ===================== RIGHT / ASIDE ===================== -->
+      <aside class="glass reveal">
+  <!-- ✅ Profile Photo -->
+ <div style="text-align:center; margin-bottom:20px">
+  <img src="resnavp.jpg" alt="Navya Profile" 
+       style="width:70%;  height:70%;  object-fit:cover; border:3px solid var(--border)">
+</div>
+  <!-- ✅ Quick Info (More Info) -->
+
+        <h3>Quick Info</h3>
+        <section id="contact">
+  <h2>Contact</h2>
+  <p>
+    Email: <span id="email">navyashreems75@gmail.com</span> 
+    <button class="copy-btn" onclick="copyToClipboard('email')">Copy</button>
+  </p>
+  <p>
+    Phone: <span id="phone">+91 8073727165</span> 
+    <button class="copy-btn" onclick="copyToClipboard('phone')">Copy</button>
+  </p>
+</section>
+        <h3>Languages</h3>
+        <ul><li>English</li><li>Kannada</li><li>Hindi</li></ul>
+        <h3>Hobbies</h3>
+        <ul><li>Music</li><li>Dance</li><li>Sports</li></ul>
+         <h2>Social Media</h2>
+        <p>
+          <a class="btn" href="https://www.linkedin.com/in/navyashree-m-s-62509927b/">LinkedIn</a>
+        <a class="btn" href="https://github.com/Navyashreems75" style="margin-left:8px">GitHub</a>
+        </p>
+      </aside>
+    </main>
+
+    <footer class="glass reveal">
+      <p>&copy; 2025 Navyashree M S | Portfolio</p>
+      <p>
+        <a class="btn" href="#about" style="margin-left:8px">Back to top</a>
+      </p>
+    </footer>
+  </div>
+
+  <!-- ===================== DIALOG ===================== -->
+  <dialog id="projectDialog" class="glass">
+    <h3 id="dialogTitle" style="margin-top:0"></h3>
+    <div id="dialogBody"></div>
+    <form method="dialog" style="margin-top:14px">
+      <button class="btn">Close</button>
+    </form>
+  </dialog>
+
+  <script>
+  // Theme toggle
+  const themeBtn = document.getElementById('themeBtn');
+  const root = document.documentElement;
+  const saved = localStorage.getItem('theme');
+  if (saved) {
+    root.setAttribute('data-theme', saved);
+    themeBtn.textContent = saved === 'dark' ? '☀️' : '🌙';
+  }
+  themeBtn.addEventListener('click', () => {
+    const current = root.getAttribute('data-theme') || 'light';
+    const next = current === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+    themeBtn.textContent = next === 'dark' ? '☀️' : '🌙';
+  });
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('show');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => io.observe(el));
+
+  // Project dialog
+  const dlg = document.getElementById('projectDialog');
+  const dlgTitle = document.getElementById('dialogTitle');
+  const dlgBody = document.getElementById('dialogBody');
+  window.openProject = (title, body) => {
+    dlgTitle.textContent = title;
+    dlgBody.innerHTML = body;
+    dlg.showModal();
+  };
+
+  // Copy email
+  // Copy email or phone by ID
+function copyToClipboard(id) {
+  const text = document.getElementById(id).textContent.trim();
+  navigator.clipboard.writeText(text).then(() => {
+    alert(text + " copied!");
+  });
+}
+  // ✅ Smooth scroll + highlight active nav
+  document.addEventListener("DOMContentLoaded", () => {
+    const sections = document.querySelectorAll("section");
+    const navLinks = document.querySelectorAll("nav a");
+    const navbar = document.querySelector("nav");
+    const offset = navbar ? navbar.offsetHeight + 20 : 80; // adjust auto height
+
+    // ✅ Smooth scroll with true centering
+    navLinks.forEach(link => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute("href").substring(1);
+        const targetSection = document.getElementById(targetId);
+
+        if (targetSection) {
+          const rect = targetSection.getBoundingClientRect();
+          const absoluteElementTop = rect.top + window.scrollY;
+          const middle = absoluteElementTop - (window.innerHeight / 2) + (rect.height / 2);
+
+          window.scrollTo({
+            top: middle,
+            behavior: "smooth"
+          });
+        }
+      });
+    });
+
+    // Highlight current section
+    window.addEventListener("scroll", () => {
+      let current = "";
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - offset - 50;
+        if (scrollY >= sectionTop) {
+          current = section.getAttribute("id");
+        }
+      });
+      navLinks.forEach(link => {
+        link.classList.remove("active");
+        if (link.getAttribute("href") === "#" + current) {
+          link.classList.add("active");
+        }
+      });
+    });
+  });
+</script>
+</body>
+</html>
