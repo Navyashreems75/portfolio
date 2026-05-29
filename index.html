@@ -80,12 +80,20 @@ nav {
 }
 .hero h1 {
   font-family: 'DM Serif Display', serif;
-  font-size: clamp(42px, 7vw, 72px);
-  line-height: 1.1;
-  letter-spacing: -2px;
+  font-size: clamp(52px, 9vw, 90px);
+  line-height: 1.05;
+  letter-spacing: -3px;
   color: var(--ink);
-  margin-bottom: 24px;
+  margin-bottom: 16px;
   opacity: 0; animation: fadeUp 0.6s 0.4s forwards;
+}
+.hero-tagline {
+  font-size: clamp(16px, 2.5vw, 22px);
+  font-weight: 300;
+  color: var(--ink-soft);
+  margin-bottom: 24px;
+  letter-spacing: 0.5px;
+  opacity: 0; animation: fadeUp 0.6s 0.5s forwards;
 }
 .hero h1 em { font-style: italic; color: var(--accent); }
 .hero-desc {
@@ -282,6 +290,27 @@ footer {
 }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 
+.project-link {
+  display: inline-block; margin-top: 14px;
+  font-size: 13px; font-weight: 500; color: var(--accent);
+  text-decoration: none; border-bottom: 1px solid var(--accent-light);
+  padding-bottom: 2px; transition: border-color 0.2s;
+}
+.project-link:hover { border-color: var(--accent); }
+.modal-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,0.75); z-index: 999;
+  align-items: center; justify-content: center;
+}
+.modal-inner {
+  background: #fff; border-radius: 12px; padding: 16px;
+  max-width: 600px; width: 90%; position: relative;
+}
+.modal-inner img { width: 100%; border-radius: 8px; }
+.modal-close {
+  position: absolute; top: 10px; right: 14px;
+  font-size: 22px; cursor: pointer; color: #444; background: none; border: none;
+}
 /* RESPONSIVE */
 @media (max-width: 768px) {
   .about-grid { grid-template-columns: 1fr; gap: 32px; }
@@ -308,8 +337,9 @@ footer {
 <!-- HERO -->
 <section class="hero" id="home">
   <div class="hero-inner">
-    <div class="hero-eyebrow">AI/ML Engineer · Bengaluru, India</div>
-    <h1>Navyashree M S<br/><em>Building Intelligent</em><br/>Systems</h1>
+    <div class="hero-eyebrow">AI/ML Engineer · Davanagere, Karnataka</div>
+    <h1>Navyashree M S</h1>
+    <div class="hero-tagline">Building <em style="font-style:italic; color:var(--accent);">Intelligent Systems</em></div>
     <p class="hero-desc">
       B.E. CSE Graduate with hands-on experience in computer vision, deep learning, and end-to-end AI deployment. Passionate about turning complex data into real-world solutions.
     </p>
@@ -352,7 +382,7 @@ footer {
       <div class="about-info">
         <div class="info-row">
           <span class="info-label">Location</span>
-          <span class="info-val">Bengaluru, Karnataka</span>
+          <span class="info-val">Davanagere, Karnataka</span>
         </div>
         <div class="info-row">
           <span class="info-label">Email</span>
@@ -514,6 +544,7 @@ footer {
         <span class="stack-tag">MobileNetV2</span>
         <span class="stack-tag">Flask</span>
       </div>
+      <a href="https://github.com/navyashreems75/face-attendance-system" target="_blank" class="project-link">View on GitHub →</a>
     </div>
     <div class="project-card reveal">
       <div class="project-badge">Computer Vision</div>
@@ -525,6 +556,7 @@ footer {
         <span class="stack-tag">Keras</span>
         <span class="stack-tag">MobileNetV2</span>
       </div>
+      <a href="https://github.com/navyashreems75" target="_blank" class="project-link">View on GitHub →</a>
     </div>
     <div class="project-card reveal">
       <div class="project-badge">Machine Learning</div>
@@ -536,6 +568,7 @@ footer {
         <span class="stack-tag">scikit-learn</span>
         <span class="stack-tag">Streamlit</span>
       </div>
+      <a href="https://github.com/navyashreems75/customer-purchase-behaviour" target="_blank" class="project-link">View on GitHub →</a>
     </div>
     <div class="project-card reveal">
       <div class="project-badge">Bioinformatics</div>
@@ -547,6 +580,7 @@ footer {
         <span class="stack-tag">ML Pipeline</span>
         <span class="stack-tag">PCA</span>
       </div>
+      <a href="https://github.com/navyashreems75" target="_blank" class="project-link">View on GitHub →</a>
     </div>
   </div>
 </section>
@@ -586,6 +620,14 @@ footer {
     <div class="section-title">Certifications</div>
   </div>
   <div class="cert-grid">
+    <div class="cert-card reveal" onclick="document.getElementById('cert-modal').style.display='flex'" style="cursor:pointer; border: 1.5px solid var(--accent);">
+      <div class="cert-icon">🏢</div>
+      <div>
+        <div class="cert-name">AI and Data Science Intern · 15 Weeks</div>
+        <div class="cert-issuer">Krugna Technologies Pvt Ltd · Feb–May 2026</div>
+        <div style="font-size:11px; color:var(--accent); margin-top:4px; font-weight:500;">Click to view certificate →</div>
+      </div>
+    </div>
     <div class="cert-card reveal">
       <div class="cert-icon">🤖</div>
       <div>
@@ -631,6 +673,12 @@ footer {
   </div>
 </section>
 
+<div class="modal-overlay" id="cert-modal" onclick="this.style.display='none'">
+  <div class="modal-inner" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="document.getElementById('cert-modal').style.display='none'">&#x2715;</button>
+    <img src="krugna.png" alt="Krugna Technologies Certificate"/>
+  </div>
+</div>
 <footer>
   © 2026 Navyashree M S · Designed & Built with ♥
 </footer>
